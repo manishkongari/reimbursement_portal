@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee Reimbursement Portal</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <!-- Include Bootstrap CSS from CDN -->
+
+
+  <!-- Include application stylesheet -->
+  <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
+
+  <!-- Include application JavaScript (for Import Maps) -->
+  <%= javascript_importmap_tags %>
+  <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.0.0/dist/turbo.min.js"></script>
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Employee Reimbursement Portal</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <% if user_signed_in? && current_user.employee? %>
+          <li class="nav-item">
+            <%= link_to 'Submit Bill', new_bill_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+        <% if user_signed_in? && current_user.admin? %>
+          <li class="nav-item">
+            <%= link_to 'Employee List', employees_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'View All Bills', view_all_bills_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+  <%= yield %>
+</body>
+</html>

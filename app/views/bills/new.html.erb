@@ -1,0 +1,17 @@
+<h1>Submit a New Bill</h1>
+
+<%= simple_form_for @bill do |f| %>
+  <div class="form-group">
+    <%= f.input :amount, label: 'Amount', input_html: { step: 0.01 }, required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :bill_type, collection: [['Food', 'Food'], ['Travel', 'Travel'], ['Others', 'Others']], label: 'Type', required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :employee_id, collection: Employee.all.map { |e| [e.full_name, e.id] }, label: 'Employee', required: true %>
+  </div>
+
+  <%= f.submit 'Submit Bill', class: 'btn btn-primary' %>
+<% end %>

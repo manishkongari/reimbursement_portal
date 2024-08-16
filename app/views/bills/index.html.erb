@@ -1,0 +1,27 @@
+<h1>All Bills</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Amount</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Submitted By</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bills.each do |bill| %>
+      <tr>
+        <td><%= number_to_currency(bill.amount) %></td>
+        <td><%= bill.bill_type.present? ? bill.bill_type.humanize : 'Not Specified' %></td>
+        <td><%= bill.status.present? ? bill.status.humanize : 'Not Specified' %></td>
+        <td><%= bill.employee.full_name %></td>
+        <td>
+          <%= link_to 'Approve', approve_bill_path(bill), method: :patch, class: 'btn btn-success' %>
+          <%= link_to 'Reject', reject_bill_path(bill), method: :patch, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
